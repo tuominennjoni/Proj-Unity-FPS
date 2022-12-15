@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
@@ -10,7 +12,10 @@ public class MainMenu : MonoBehaviour
     public GameObject interfacePanel;
     public GameObject controlPanel;
     public GameObject extraPanel;
-
+    public GameObject quitGamePanel;
+    public GameObject playBtn;
+    public GameObject quitBtn;
+    public GameObject settingsBtn;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +27,16 @@ public class MainMenu : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ConfirmQuitPanel()
+    {
+        quitGamePanel.SetActive(true);
+    }
+
+    public void QuitTheGame()
+    {
+        Application.Quit();
     }
 
     public void GoToLobby() 

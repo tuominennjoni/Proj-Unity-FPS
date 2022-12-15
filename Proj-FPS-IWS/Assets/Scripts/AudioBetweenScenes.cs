@@ -6,11 +6,14 @@ using TMPro;
 
 public class AudioBetweenScenes : MonoBehaviour
 {
-
+    private static readonly string FirstPlay = "FirstPlay";
+    private static readonly string BackgroundPref = "BackgroundPref";
     public Slider volumeSlider;
+    private int firstPlayInt;
     [SerializeField] private TMP_Text lobbySoundText;
 
     public GameObject ObjectMusic;
+    private float backgroundFloat, soundEffectFloat;
 
     private float MusicVolume = 0f;
     public AudioSource AudioSource;
@@ -24,6 +27,22 @@ public class AudioBetweenScenes : MonoBehaviour
         MusicVolume = PlayerPrefs.GetFloat("volume");
         AudioSource.volume = MusicVolume;
         volumeSlider.value = MusicVolume;
+
+        firstPlayInt = PlayerPrefs.GetInt(FirstPlay);
+
+        if(firstPlayInt == 0)
+        {
+            backgroundFloat = 0.17f;
+            volumeSlider.value = backgroundFloat;
+            PlayerPrefs.SetFloat(BackgroundPref, backgroundFloat);
+            PlayerPrefs.SetInt(FirstPlay, -1);
+
+        }
+        else
+        {
+            backgroundFloat = PlayerPrefs.GetFloat(BackgroundPref);
+            volumeSlider.value = backgroundFloat;
+        }
     }
 
     // Update is called once per frame
@@ -31,6 +50,24 @@ public class AudioBetweenScenes : MonoBehaviour
     {
         AudioSource.volume = MusicVolume;
         PlayerPrefs.SetFloat("volume", MusicVolume);
+    }
+
+    public void SaveSoundSettings() 
+    {
+        PlayerPrefs.SetFloat(BackgroundPref, volumeSlider.value);
+    }
+
+    void OnApplicationFocus(bool inFocus)
+    {
+        if(!inFocus)
+        {
+            SaveSoundSettings();
+        }
+    }
+
+    public void UpdateSound() 
+    {
+        AudioSource.volume = volumeSlider.value;
     }
 
     public void VolumePlayer(float volume) 
