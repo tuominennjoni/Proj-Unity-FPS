@@ -6,7 +6,7 @@ public class DoNotDestroyButtonSound : MonoBehaviour
 {
     // Start is called before the first frame update
     private void Awake() {
-        GameObject[] buttonObj = GameObject.FindGameObjectsWithTag("ButtonSound");
+        GameObject[] buttonObj = GameObject.FindGameObjectsWithTag("SoundButton");
         if(buttonObj.Length > 1) 
         {
             Destroy(this.gameObject);
