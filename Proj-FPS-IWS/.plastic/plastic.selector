@@ -1,0 +1,4 @@
+repository "Project-MP-S@Kiikarit@cloud"
+  path "/"
+    br "/main"
+    co "/main"

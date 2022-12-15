@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public float walkSpeed;
-    public Camera camerah;
+    public Camera Playercamera;
     public float runSpeed;
 
     public float mouseSensitivity;

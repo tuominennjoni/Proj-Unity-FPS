@@ -32,7 +32,7 @@ public class AudioBetweenScenes : MonoBehaviour
 
         if(firstPlayInt == 0)
         {
-            backgroundFloat = 0.17f;
+            backgroundFloat = 0.2f;
             volumeSlider.value = backgroundFloat;
             PlayerPrefs.SetFloat(BackgroundPref, backgroundFloat);
             PlayerPrefs.SetInt(FirstPlay, -1);
