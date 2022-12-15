@@ -943,9 +943,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 1821372493}
+  ButtonSlider: {fileID: 1604668245}
   lobbySoundText: {fileID: 1962652738}
+  buttonSoundText: {fileID: 1422781843}
   ObjectMusic: {fileID: 0}
   AudioSource: {fileID: 785947541}
+  AAudioSource: {fileID: 586171122}
 --- !u!1 &191312638
 GameObject:
   m_ObjectHideFlags: 0
@@ -2462,6 +2465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 586171123}
   - component: {fileID: 586171122}
+  - component: {fileID: 586171124}
   m_Layer: 0
   m_Name: UI Button
   m_TagString: Untagged
@@ -2573,13 +2577,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 586171121}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 171.2392, y: 151.62718, z: 0.5794587}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &586171124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586171121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed50c979abc4f7b409377e478501ebac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &586955301
 GameObject:
   m_ObjectHideFlags: 0
@@ -6413,7 +6429,31 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 183845391}
+        m_TargetAssemblyTypeName: AudioBetweenScenes, Assembly-CSharp
+        m_MethodName: ButtonVolumeSlider
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 183845391}
+        m_TargetAssemblyTypeName: AudioBetweenScenes, Assembly-CSharp
+        m_MethodName: ButtonVolumePlayer
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1631427888
 GameObject:
   m_ObjectHideFlags: 0
