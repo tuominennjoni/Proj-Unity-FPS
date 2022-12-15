@@ -5,46 +5,101 @@ using TMPro;
 using UnityEngine.UI;
 public class ResolutionETC : MonoBehaviour
 {
-    [SerializeField] private TMP_Dropdown resolutionDropdown;
-    private Resolution[] resolutions;
-    private List<Resolution> filteredResolutions;
-    private float currentRefreshRate;
-    private int currentResolutionIndex;
+    public Toggle fullscreenTog, vsyncTog;
+    public List<ResItem> resolutions = new List<ResItem>();
+    public int selectedResolution;
+    public TMP_Text resolutionLabel;
 
-    void Start() 
+    // Start is called before the first frame update
+    void Start()
     {
-        resolutions = Screen.resolutions;
+        fullscreenTog.isOn = Screen.fullScreen;
 
-        filteredResolutions = new List<Resolution>();
-
-        resolutionDropdown.ClearOptions();
-        currentRefreshRate = Screen.currentResolution.refreshRate;
-
-        for(int i = 0; i < resolutions.Length; i++) {
-            if(resolutions[i].refreshRate == currentRefreshRate)
-            {
-                filteredResolutions.Add(resolutions[i]);
-            }   
+        if(QualitySettings.vSyncCount == 0) 
+        {
+            vsyncTog.isOn = false;
+        }
+        else 
+        {
+            vsyncTog.isOn = true;
         }
 
-    List<string> options = new List<string>();
-    for(int i = 0; i < filteredResolutions.Count; i++) {
-        string resolutionOptions = filteredResolutions[i].width + " x " + filteredResolutions[i].height + " | " + filteredResolutions[i].refreshRate + " Hz";
-        options.Add(resolutionOptions);
-        if(filteredResolutions[i].width == Screen.width && filteredResolutions[i].height == Screen.height) 
+        bool foundRes = false;
+
+        for(int i = 0; i < resolutions.Count; i++) {
+            if(Screen.width == resolutions[i].horizontal && Screen.height == resolutions[i].vertical)
+            {
+                foundRes = true;
+
+                selectedResolution = i;
+
+                UpdateResLabel();
+            }
+        }
+
+        if(!foundRes) // jos ei ole sopivaa resoluutiota käyttälle, niin haetaan sellainen
         {
-            currentResolutionIndex = i;
+            ResItem newRes = new ResItem();
+            newRes.horizontal = Screen.width;
+            newRes.vertical = Screen.height;
+
+            resolutions.Add(newRes);
+            selectedResolution = resolutions.Count - 1;
+
+            UpdateResLabel();
         }
     }
 
-    resolutionDropdown.AddOptions(options);
-    resolutionDropdown.value = currentResolutionIndex;
-    resolutionDropdown.RefreshShownValue();
-}
-
-    public void SetResolution(int resolutionIndex) 
+    // Update is called once per frame
+    void Update()
     {
-        Resolution resolution = filteredResolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, true);
+        
+    }
+
+    public void ResLeft() 
+    {
+        selectedResolution--;
+        if(selectedResolution < 0) 
+        {
+            selectedResolution = 0;
+        }     
+        UpdateResLabel();
+    }
+
+    public void ResRight() 
+    {
+        selectedResolution++;
+        if(selectedResolution > resolutions.Count - 1)
+        {
+            selectedResolution = resolutions.Count - 1;
+        }
+        UpdateResLabel();
+    }
+
+    public void UpdateResLabel()
+    {
+        resolutionLabel.text = resolutions[selectedResolution].horizontal.ToString() + " x " + resolutions[selectedResolution].vertical.ToString();
+    }
+
+    public void ApplyGraphics() 
+    {
+        //Screen.fullScreen = fullscreenTog.isOn;
+
+        if(vsyncTog.isOn) 
+        {
+            QualitySettings.vSyncCount = 1;
+        }
+        else 
+        {
+            QualitySettings.vSyncCount = 0;
+        }
+
+        Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenTog.isOn);
+    }
+
+    [System.Serializable]
+    public class ResItem 
+    {
+        public int horizontal, vertical;
     }
 }
