@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class GraphicsSettings : MonoBehaviour
 {
@@ -88,7 +89,7 @@ public class GraphicsSettings : MonoBehaviour
 
     public void ApplyGraphics() 
     {
-        //Screen.fullScreen = fullscreenTog.isOn;
+        Screen.fullScreen = fullscreenTog.isOn;
 
         if(vsyncTog.isOn) 
         {
